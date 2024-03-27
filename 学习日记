@@ -1,1 +1,78 @@
-二分五分·1范文芳输入范围乳房个人分二个人
+//记录一下今天的学习，复习以前知识点2024.3.27
+
+//一个C++实现的老师和学生的结构体案例
+
+//首先目标要求是使用C++去实现打印三个老师，每个老师带5个学生，已经每个学生的成绩随机出现的一个程序
+
+//因为这只是一个小程序模块，并不需要拆分为很多小模块去写，其本身就作为一个模块就可以完成。
+//这个模块要实现 ，大致分为三个步骤，    
+                //第一，生成数据
+                //第二，将生成的数据按目标随机化
+                //第三，打印数据
+
+
+#include<iostream>
+using namespace std;
+#include<string>
+#include<ctime>
+struct Student {
+	string S_name;
+	int score;
+
+};
+
+struct Teacher {
+	string T_name;
+	Student Arr[5];
+};
+void Create_Teacher(Teacher Teachers[], int len) {
+	string T_name1 = "老师";
+	string S_name1 = "学生";
+	string NameSeed = "ABCDE";
+	//创建老师
+	for (int i = 0; i < len; i++) {
+		Teachers[i].T_name = T_name1 + NameSeed[i];
+		
+		
+		//创建对应老师下的学生
+		for (int j = 0; j < 5; j++) {
+			int random = rand() % 61 + 40;
+			Teachers[i].Arr[j].S_name = S_name1 + NameSeed[j];
+			Teachers[i].Arr[j].score = random;
+
+		//	Teachers[i].Arr->S_name= S_name1 + NameSeed[j];
+		//	Teachers[i].Arr->score = 60;
+		// 
+		// 
+		// 
+		//	Teachers->Arr[j].S_name =
+		//	Teachers->Arr[j].score = 60;
+		}
+	}
+
+}
+//打印创建的值
+void PrintInfo(Teacher Teachers[], int len) {
+	for (int i = 0; i < len; i++) {
+		cout << "老师" << Teachers[i].T_name << endl;
+		for (int j = 0; j < 5; j++) {
+			cout << "\t学生" << Teachers[i].Arr[j].S_name << "成绩" <<Teachers[i].Arr[j].score<< endl;
+		}
+	}
+}
+
+int main() {
+	//随机数种子
+	srand((unsigned int)time(NULL));
+	//实例化老师的结构体
+	Teacher Teachers[3];
+	int len = sizeof(Teachers) / sizeof(Teacher);
+	//生存一个老师带学生的结构体
+	Create_Teacher(Teachers, len);
+
+	//打印出来即可
+	PrintInfo(Teachers, len);
+
+	system("pause");
+	return 0;
+}
