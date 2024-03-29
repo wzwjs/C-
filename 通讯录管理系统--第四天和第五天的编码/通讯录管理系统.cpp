@@ -1,0 +1,230 @@
+﻿//封装函数显示该界面如, void showMenu()
+//在main函数中调用封装好的函数
+
+//功能描述：
+//实现添加联系人功能，联系人上限为1000人，
+// 联系人信息包括
+// （姓名、性别、年龄、联系电话、家庭住址）
+//添加联系人实现步骤
+	//设计联系人结构体
+	//设计通讯录结构体
+
+	//main函数中创建通讯录	?
+	// 封装添加联系人函数	?	
+	//测试添加联系人功能	?
+
+#include<iostream>
+using namespace std;
+#include<string>
+
+#define MAX 1000
+//Struct_Area
+//联系人的结构体
+struct link_pepole {
+	string name;
+	int sex;
+	//	string sex;
+	int age;
+	int moblie_number;
+	string address;
+};
+//通讯录的结构体
+struct link_book {
+	link_pepole arr[MAX];
+	int now_size;
+};
+//Fuction_Area
+//Menu_Space
+void showMenu() {
+	cout << "********************" << endl;
+	cout << "***  1,添加联系人***" << endl;
+	cout << "***  2,显示联系人***" << endl;
+	cout << "***  3,删除联系人***" << endl;
+	cout << "***  4,查找联系人***" << endl;
+	cout << "***  5,修改联系人***" << endl;
+	cout << "***  6,清空联系人***" << endl;
+	cout << "***  0,退出通讯录***" << endl;
+	cout << "********************" << endl;
+
+};
+
+//add_function
+void add(link_book * one) {
+
+	//当通讯录已经满时
+	if (one->now_size >= MAX) {
+		cout << "当前通讯录已经有1000个人了" << endl;
+		return;  //?
+	}
+
+	//当通讯录没有满时
+	else {
+		//姓名
+		cout << "请输入姓名" << endl;
+		cin >> one->arr[one->now_size].name;
+		// 性别
+		/*	这是我写的代码，跟老师的代码比起来感觉代码的健全性，可读性；还是有距离
+		cout << "男性输入1,女性输入0" << endl;
+		cin >> one->arr[one->now_size].sex;
+		*/
+			//老师写的代码
+		cout << "请输入性别：" << endl;
+		cout << "1---男" << endl;
+		cout << "0----女" << endl;
+		int sex = 0;
+		while (true) {
+			cin >> sex;
+			if (sex == 1 || sex == 2)
+			{
+				one->arr[one->now_size].sex = sex;
+				break;
+			}
+			else
+				cout << "你输入的数字有误。请重新输入";
+		}
+		// 年龄
+		/*	这是自己看题目写的代码，感觉代码可读性，健全性可以提高一下，以下就是学习老师关于性别写法的对于改进我年龄的写法
+			cout << "请输入年龄" << endl;
+			cin >> one->arr[one->now_size].age;
+		*/
+		cout << "请输入年龄：（年龄在0~150之间的整数）" << endl;
+		int age = 0;
+		while (true) {
+			cin >> age;
+			if (age > 0 && age < 150) {    //如何判断将输入非数字类型，关键是要判断输入非数字类型，应该怎么判断
+				one->arr[one->now_size].age = age;
+				break;
+			}
+			else
+				cout << "你输入的年龄有误，请重新输入";
+		}
+		
+
+	
+		// 联系电话
+		cout << "请输入联系电话" << endl;
+		cin >> one->arr[one->now_size].moblie_number;
+
+		// 家庭住址
+		cout << "请输入家庭住址" << endl;
+		cin >> one->arr[one->now_size].address;
+		one->now_size++;
+		cout << "当前通讯录的人数为：" << one->now_size << endl;
+		cout << "添加成功" << endl;
+		system("pause");//请点击任意键
+		system("cls");//清屏操作
+	}
+
+};
+
+void ShowPerson(link_book  *one) {
+	//如果通讯录中没有人即打印提示，通讯录中没有人
+
+	//一个错误，在写显示联系人的时候，将原本要写==的地方写成为了=，导至了这个地方写死了，搞的这个循环就死到了这里，一直没有运行了；将这个传入的这个通讯录变量的
+	if (one->now_size == 0) {
+		cout << "当前通讯录中没有联系人";
+	}
+	else
+		for (int i = 0; i < one->now_size; i++)
+		{
+			//打印这个人的信息
+			//姓名、性别、年龄、联系电话、家庭住址
+		
+			cout << "这个人的姓名是：" << one->arr[i].name << "\t";
+
+			cout << "这个人的性别是：" << ((one->arr[i].sex==1)?"男": "女") << "\t";//这个是三目表达式()?，为什么这个里面对 汉字，也就是里面的字符的引用要加双引号，而对数字的引用就直接写就行了，？好像所有对汉字的引用都要加双引号
+			//应该是这样理解的，第一：如果不加双引号，那这个从编译器层面就会报错误，因为编译器根本就不认识汉字，
+			                   //  第二，加双引号的目的，就是让这个值的数据类型是字符串，从而编译器就可以对这个值继续操作，从语法层面和操作层面就可以了，
+								//	第三，为什么不使用单引号，在汉字编码和英文字符编码在存储的单位就是不一样的，单引号表示的是一个字符，其存储空间是1，而一个汉字的存储空间是二个字符，如果分配一个字符去存储汉字，即有错误
+
+			cout << "这个人的年龄是：" << one->arr[i].age << "\t";
+
+			cout << "这个人的联系电话是：" << one->arr[i].moblie_number << "\t";
+
+			cout << "这个人的家庭住址是：" << one->arr[i].address<< endl;
+			system("pause");//作用是暂停一下，然后显示一个请点击任意键结束
+			system("cls");//清空当前屏幕，应该是清空由当前函数显示的屏幕，有一个局部作用域的功能，分其作用域的屏幕不能清空
+		}
+}
+//在通讯录中删除一个人，首先要判断这个人在通讯录中是否存在
+	//存在即返回对应下标的索引，不存在的话，就返回-1
+    //然后在通讯录中遍历到这个索引所对应到的人，然后，再删除即可
+//是否存在
+int  isExist(link_book* one, string name) {
+	for (int i = 0; i < one->now_size; i++) {
+		if (one->arr[i].name == name) {
+			return i;
+		}
+		else
+			return -1;
+	}
+
+}
+
+
+void DeletePerson(link_book * one) {
+	//输入一个想要删除的值
+	string name;
+	cin >> name;
+	//判断在通讯录中是否有这个人
+	int ret = isExist(one, name);
+	//有即删除
+	if (ret != -1) {
+		for (int j = ret; j < one->now_size - 1; j++) {
+			one->arr[j] = one->arr[j + 1];
+		}
+		cout << "删除成功" << endl;
+		one->now_size--;
+	}
+	else
+		cout << "该通讯录中没有这个人";
+}
+
+int main() {
+
+	//
+	// 初始化通讯录变量并给当前通讯录变量赋初值
+	link_book one;
+	one.now_size = 0;
+
+	//use function--printf Menu_Space
+
+	
+//功能描述：退出通讯录系统
+
+//思路：根据用户不同的选择，进入不同的功能，可以选择switch分支结构，将整个架构进行搭建 
+//当用户选择0时候，执行退出，选择其他先不做操作，也不会退出程序
+
+while (true) {
+	showMenu();
+	int select = 0;
+	cin >> select;
+	switch (select) {
+
+		//	case 1:add(one);  1,添加联系人   自己写的错误1，值传递不修改实际的参数，
+		//									让实参改变即应该使用地址传递
+		// 	//修改代码为
+	case 1:add(&one);
+		break;
+	case 2: ShowPerson(&one);//2,显示联系人
+		break;
+	case 3:DeletePerson(&one);//3,删除联系人
+		break;
+	case 4:// 4,查找联系人
+		break;
+	case 5:// 5,修改联系人
+		break;
+	case 6://6,清空联系人
+		break;
+	case 0:// 0,退出通讯录
+		cout << "欢迎下次使用" << endl;
+		system("pause");
+		return 0;
+		break;
+
+	}
+};
+
+system("pause");
+return 0;
+}
