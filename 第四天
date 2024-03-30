@@ -130,6 +130,20 @@ struct link_book {
 	link_pepole arr[MAX];
 	int now_size;
 };
+//Fuction_Area
+//Menu_Space
+void showMenu() {
+	cout << "********************" << endl;
+	cout << "***  1,添加联系人***" << endl;
+	cout << "***  2,显示联系人***" << endl;
+	cout << "***  3,删除联系人***" << endl;
+	cout << "***  4,查找联系人***" << endl;
+	cout << "***  5,修改联系人***" << endl;
+	cout << "***  6,清空联系人***" << endl;
+	cout << "***  0,退出通讯录***" << endl;
+	cout << "********************" << endl;
+
+};
 
 int main() {
   	// 初始化通讯录变量并给当前通讯录变量赋初值
@@ -184,6 +198,20 @@ struct link_book {
 	int now_size;
 };
 
+//Fuction_Area
+//Menu_Space
+void showMenu() {
+	cout << "********************" << endl;
+	cout << "***  1,添加联系人***" << endl;
+	cout << "***  2,显示联系人***" << endl;
+	cout << "***  3,删除联系人***" << endl;
+	cout << "***  4,查找联系人***" << endl;
+	cout << "***  5,修改联系人***" << endl;
+	cout << "***  6,清空联系人***" << endl;
+	cout << "***  0,退出通讯录***" << endl;
+	cout << "********************" << endl;
+
+};
 
 //add_function
 void add(link_book * one) {
