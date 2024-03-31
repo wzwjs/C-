@@ -1,0 +1,32 @@
+//今天的编码任务是将这个通讯录管理系统剩下的全部搞定
+//剩下的包括   查找联系人，修改联系人，清空联系人
+
+1,//查找联系人，Find();本质还是在还是入口处写一个调用函数的，再在函数区写一个函数去实现find这个的逻辑即OK
+   
+//调用函数
+    case 4:Find(&one);// 4,查找联系人
+	        break;
+
+//函数逻辑实现
+    
+//查找一个联系人的操作，首先去判断这个联系人是否存在，即可以调用那个IsExist这个函数，如何再通过调用ShowPerson这个函数去显示该值
+void Find(link_book* one) {
+	//首先应该输入要删除联系人的姓名
+	string name;
+	cout << "\n请输入要查找联系人的姓名" << "\n";
+	cin >> name;
+
+	
+	int ret = isExist(one, name);
+	//2024.3.31,启示三，函数之间是可以相互调用的
+	//如果存在就调用函数给打印出来，不存在就提示不存在
+	if (ret != -1) {
+
+		cout <<"姓名：" << one->arr[ret].name << " 年龄：" << one->arr[ret].age <<"性别" << one->arr[ret].sex << "联系电话" << one->arr[ret].moblie_number << "  地址" << one->arr[ret].address << endl;
+	}
+	else
+		cout << "查无此人" << endl;
+	//2024，3，31第二次成长的地方
+	system("pause");
+	system("cls");
+}
